@@ -1,10 +1,12 @@
 #!/bin/bash
 
-targetdir=~
+targetdir=~/voc-poc
 pidfile=/tmp/voc.pid
 
 
 function install {
+
+mkdir $targetdir
 
 sudo apt-get install -y ffmpeg curl
 curl -fsSL https://deb.nodesource.com/setup_16.x | sudo -E bash -
@@ -13,7 +15,7 @@ git clone https://github.com/fpv-wtf/voc-poc.git
 cp -r voc-poc/* $targetdir/ # voc-poc expects /home/pi/index.js
 sudo apt-get install -y libudev-dev
 
-npm install $targetdir
+npm install $targetdir --prefix $targetdir/node_modules
 
 
 start
