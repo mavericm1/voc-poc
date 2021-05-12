@@ -12,7 +12,8 @@ sudo apt-get install -y nodejs git
 git clone https://github.com/fpv-wtf/voc-poc.git
 cp -r voc-poc/* $targetdir/ # voc-poc expects /home/pi/index.js
 sudo apt-get install -y libudev-dev
-npm install
+
+npm install $targetdir
 
 
 start
