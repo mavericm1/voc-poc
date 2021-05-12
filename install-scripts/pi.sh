@@ -14,7 +14,7 @@ git -C $installdir clone https://github.com/fpv-wtf/voc-poc.git
 
 sudo apt-get install -y libudev-dev
 
-npm install --prefix $targetdir $targetdir 
+npm install --prefix $targetdir -g $targetdir 
 
 
 start
