@@ -12,7 +12,7 @@ mkdir $targetdir
 sudo apt-get install -y ffmpeg curl
 curl -fsSL https://deb.nodesource.com/setup_16.x | sudo -E bash -
 sudo apt-get install -y nodejs git
-git clone https://github.com/fpv-wtf/voc-poc.git
+git clone https://github.com/fpv-wtf/voc-poc.git $targetdir
 
 sudo apt-get install -y libudev-dev
 
