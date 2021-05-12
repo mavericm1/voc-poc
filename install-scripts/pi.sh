@@ -14,9 +14,9 @@ git -C $installdir clone https://github.com/fpv-wtf/voc-poc.git
 
 sudo apt-get install -y libudev-dev
 
-mkdir $targetdir/node_modules
+cd $targetdir
 
-npm install --prefix $targetdir -g $targetdir 
+npm install
 
 
 start
@@ -31,9 +31,9 @@ if [[ -e "$pidfile" ]]
     rm $pidfile
     echo "VOC Stopped!"
 else
-    sudo node $targetdir/index.js -o | ffplay -i - -analyzeduration 1 -probesize 32 -sync ext &
-    vocpid=$!
-    echo "$vocpid" > $pidfile
+    echo "VOC Not Running!"
+    exit
+
 fi
 
 }
@@ -44,7 +44,8 @@ if [ -e "$pidfile" ] && [ $(ps $(cat $pidfile) | egrep -v "PID") ]
     then
     echo "VOC RUNNING PLEASE STOP PROCESS FIRST $0 stop"
 else
-    sudo NODE_PATH=$targetdir/node_modules node $targetdir/index.js -o | ffplay -i - -analyzeduration 1 -probesize 32 -sync ext &
+    cd $targetdir
+    node index.js -o | ffplay -i - -analyzeduration 1 -probesize 32 -sync ext &
     vocpid=$!
     echo "$vocpid" > $pidfile
     echo "VOC Started!"
