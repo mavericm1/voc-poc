@@ -7,14 +7,14 @@ pidfile=/tmp/voc.pid
 
 function install {
 
+cd $targetdir
+
 sudo apt-get install -y ffmpeg curl
 curl -fsSL https://deb.nodesource.com/setup_16.x | sudo -E bash -
 sudo apt-get install -y nodejs git
 git -C $installdir clone https://github.com/fpv-wtf/voc-poc.git
 
 sudo apt-get install -y libudev-dev
-
-cd $targetdir
 
 npm install
 
@@ -45,7 +45,7 @@ if [ -e "$pidfile" ] && [ $(ps $(cat $pidfile) | egrep -v "PID") ]
     echo "VOC RUNNING PLEASE STOP PROCESS FIRST $0 stop"
 else
     cd $targetdir
-    node index.js -o | ffplay -i - -analyzeduration 1 -probesize 32 -sync ext &
+    sudo node index.js -o | ffplay -i - -analyzeduration 1 -probesize 32 -sync ext &
     vocpid=$!
     echo "$vocpid" > $pidfile
     echo "VOC Started!"
